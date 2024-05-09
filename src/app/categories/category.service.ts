@@ -24,4 +24,8 @@ export class CategoryService {
       environment.api + 'categories', category
     )
   }
+
+  public delete(id: number) {
+    return this.http.delete(environment.api + 'categories/' + id);
+  }
 }

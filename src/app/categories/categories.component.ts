@@ -9,6 +9,7 @@ import { Category } from './category.dto';
 import { CategoryService } from './category.service';
 import { lastValueFrom } from 'rxjs';
 import { CategoryFormComponent } from './form/form.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-categories',
@@ -20,7 +21,7 @@ import { CategoryFormComponent } from './form/form.component';
     
   `,
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatCardModule, MatButtonModule, CategoryFormComponent]
+  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatCardModule, MatButtonModule, CategoryFormComponent, MatIconModule]
 })
 export class CategoriesComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -58,6 +59,13 @@ export class CategoriesComponent implements AfterViewInit {
     console.log('edit category', category)
     this.category = category
     this.showForm = true
+  }
+
+  async onDeleteCategoryClick(category: Category) {
+    if (confirm(`Deletar "${category.name}" com id ${category.id} ?`)) {
+      await lastValueFrom(this.categoryService.delete(category.id))
+      this.loadCategories()
+    }
   }
 
   constructor( private categoryService: CategoryService) {

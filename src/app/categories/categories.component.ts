@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Category } from './category.dto';
 import { CategoryService } from './category.service';
 import { lastValueFrom } from 'rxjs';
+import { CategoryFormComponent } from './form/form.component';
 
 @Component({
   selector: 'app-categories',
@@ -19,7 +20,7 @@ import { lastValueFrom } from 'rxjs';
     
   `,
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatCardModule, MatButtonModule]
+  imports: [MatTableModule, MatPaginatorModule, MatSortModule, MatCardModule, MatButtonModule, CategoryFormComponent]
 })
 export class CategoriesComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -28,7 +29,36 @@ export class CategoriesComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<Category>();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name', 'description'];
+  displayedColumns = ['id', 'name', 'description', 'actions'];
+
+  showForm: Boolean = false;
+  category!: Category
+
+  onNewCategoryClick() {
+    this.category = {
+      id: 0,
+      name: '',
+      description: ''
+    }
+    this.showForm = true;
+  }
+
+  hideCategoryForm() {
+    this.showForm = false;
+    this.loadCategories();
+  }
+
+  onSave(category: Category) {
+    const saved = lastValueFrom(this.categoryService.save(category))
+    console.log('saved', saved)
+    this.hideCategoryForm()
+  }
+
+  onEditCategoryClick(category: Category) {
+    console.log('edit category', category)
+    this.category = category
+    this.showForm = true
+  }
 
   constructor( private categoryService: CategoryService) {
 

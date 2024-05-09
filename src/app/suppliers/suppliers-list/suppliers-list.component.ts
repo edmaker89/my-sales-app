@@ -1,0 +1,29 @@
+import { Component, OnInit } from '@angular/core';
+import { MaterialModule } from '../../material.module';
+import { Suppliers } from '../suppliers.dto';
+import { Observable, lastValueFrom } from 'rxjs';
+import { SupplierService } from '../supplier.service';
+import { LoadingBarComponent } from '../../loading-bar.component';
+import { AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
+
+@Component({
+  selector: 'app-suppliers-list',
+  standalone: true,
+  imports: [MaterialModule, LoadingBarComponent, AsyncPipe, RouterLink],
+  templateUrl: './suppliers-list.component.html',
+  styles: ``
+})
+export class SuppliersListComponent implements OnInit {
+  suppliers!: Suppliers[]
+  suppliersObservable!: Observable<Suppliers[]>
+
+  constructor(private supplierService: SupplierService) {
+
+  }
+  
+  async ngOnInit(){
+    this.suppliersObservable = this.supplierService.getAll()
+    this.suppliers = await lastValueFrom(this.suppliersObservable)
+  }
+}

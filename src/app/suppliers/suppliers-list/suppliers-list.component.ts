@@ -6,11 +6,12 @@ import { SupplierService } from '../supplier.service';
 import { LoadingBarComponent } from '../../loading-bar.component';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { SupplierCardComponent } from './supplier-card/supplier-card.component';
 
 @Component({
   selector: 'app-suppliers-list',
   standalone: true,
-  imports: [MaterialModule, LoadingBarComponent, AsyncPipe, RouterLink],
+  imports: [MaterialModule, LoadingBarComponent, AsyncPipe, RouterLink, SupplierCardComponent],
   templateUrl: './suppliers-list.component.html',
   styles: ``
 })

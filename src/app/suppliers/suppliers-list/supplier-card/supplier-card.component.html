@@ -1,0 +1,7 @@
+<mat-card class="item pointer">
+    <mat-card-content [routerLink]="['show', supplier.id]">
+        <mat-card-subtitle>{{supplier.companyName}}</mat-card-subtitle>
+        <span>{{supplier.contactName}}</span>
+        <span>{{supplier.address.phone}}</span>
+    </mat-card-content>
+</mat-card>

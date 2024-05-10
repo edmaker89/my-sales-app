@@ -22,7 +22,7 @@
                         Units in Stock: {{product.unitsInStock}}
                     </mat-card-content>
                     <mat-card-actions align="end">
-                        <button mat-icon-button [disabled]="product.unitsInStock == 0">
+                        <button mat-icon-button (click)="onAddToCart(product)" [disabled]="product.unitsInStock == 0">
                             <mat-icon>add_shopping_cart</mat-icon>
                         </button>
                     </mat-card-actions>

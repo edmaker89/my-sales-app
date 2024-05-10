@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AsyncPipe } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -11,6 +11,9 @@ import { map, shareReplay } from 'rxjs/operators';
 import { MenuComponent } from '../menu/menu.component';
 import { CategoriesComponent } from '../categories/categories.component';
 import { RouterOutlet } from '@angular/router';
+import {MatBadgeModule} from '@angular/material/badge'
+import { CartService } from '../cart.service';
+
 
 @Component({
   selector: 'app-home',
@@ -26,11 +29,13 @@ import { RouterOutlet } from '@angular/router';
     AsyncPipe,
     MenuComponent,
     CategoriesComponent,
-    RouterOutlet
+    RouterOutlet,
+    MatBadgeModule
   ]
 })
 export class HomeComponent {
   private breakpointObserver = inject(BreakpointObserver);
+  cartService = inject(CartService)
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

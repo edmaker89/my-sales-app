@@ -6,6 +6,8 @@ import { ProductService } from '../product.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Product } from '../product.dto';
 import { Observable, lastValueFrom } from 'rxjs';
+import { CartService } from '../../cart.service';
+import { CartItem } from '../../cart.dto';
 
 @Component({
   selector: 'app-products-list',
@@ -17,7 +19,8 @@ import { Observable, lastValueFrom } from 'rxjs';
   styles: ``
 })
 export class ProductsListComponent implements OnInit{
-  
+
+  cartService = inject(CartService)
   productService = inject(ProductService)
   fb = inject(FormBuilder)
   products: Product[]
@@ -39,5 +42,15 @@ export class ProductsListComponent implements OnInit{
   onSearch() {
     this.getProducts(this.searchForm.value.searchTerm)
   }
+
+  onAddToCart(item: Product) {
+    const cartItem: CartItem = {
+      idProduct: item.id,
+      name: item.name,
+      quantity: 1,
+      unitPrice: item.unitPrice
+    }
+    this.cartService.addItem(cartItem)
+    }
 
 }

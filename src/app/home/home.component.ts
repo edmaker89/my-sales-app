@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { MenuComponent } from '../menu/menu.component';
 import { CategoriesComponent } from '../categories/categories.component';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import {MatBadgeModule} from '@angular/material/badge'
 import { CartService } from '../cart.service';
 
@@ -30,7 +30,8 @@ import { CartService } from '../cart.service';
     MenuComponent,
     CategoriesComponent,
     RouterOutlet,
-    MatBadgeModule
+    MatBadgeModule,
+    RouterLink
   ]
 })
 export class HomeComponent {

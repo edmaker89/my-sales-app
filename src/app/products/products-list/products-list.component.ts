@@ -8,12 +8,13 @@ import { Product } from '../product.dto';
 import { Observable, lastValueFrom } from 'rxjs';
 import { CartService } from '../../cart.service';
 import { CartItem } from '../../cart.dto';
+import { ProductCardComponent } from '../product-card/product-card.component';
 
 @Component({
   selector: 'app-products-list',
   standalone: true,
   imports: [
-    MaterialModule, AsyncPipe, LoadingBarComponent, CurrencyPipe
+    MaterialModule, AsyncPipe, LoadingBarComponent, CurrencyPipe, ProductCardComponent
   ],
   templateUrl: './products-list.component.html',
   styles: ``

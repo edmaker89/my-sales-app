@@ -14,7 +14,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 export const routes: Routes = [
     {
         path: 'categories',
-        component: CategoriesComponent
+        loadComponent: () => import('./categories/categories.component').then((c) => c.CategoriesComponent) //lazy import
     },
     {
         path: '',

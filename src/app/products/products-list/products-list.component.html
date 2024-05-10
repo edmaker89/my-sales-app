@@ -10,9 +10,11 @@
         </div>
     </form>
     <div class="container wrap">
-        @for (product of products; track product) {
-            <app-product-card [product]="product"></app-product-card>
-        }
+        @for (product of products; track product){ @defer
+            {
+                <app-product-card [product]="product"></app-product-card>
+            }
+        } 
     </div>
 } @else {
     <loading-bar></loading-bar>
